@@ -1,0 +1,15 @@
+/**
+ * VanityCert Widget Styles - Minified Version
+ *
+ * This file needs to be generated from vanitycert.css
+ *
+ * To build:
+ *   node build.js
+ *
+ * Or manually:
+ *   npx cssnano vanitycert.css vanitycert.min.css
+ *
+ * See BUILD.md for more options.
+ */
+
+/* Run build.js to generate minified CSS */

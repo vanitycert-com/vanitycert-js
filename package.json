@@ -1,0 +1,53 @@
+{
+  "name": "@vanitycert/widget",
+  "version": "1.0.0",
+  "description": "A lightweight, embeddable JavaScript widget for SSL certificate provisioning with VanityCert",
+  "main": "vanitycert.js",
+  "files": [
+    "vanitycert.js",
+    "vanitycert.min.js",
+    "vanitycert.css",
+    "vanitycert.min.css",
+    "README.md",
+    "BUILD.md"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "build:js": "npx terser vanitycert.js -o vanitycert.min.js -c -m --comments false",
+    "build:css": "node -e \"const fs=require('fs');const css=fs.readFileSync('vanitycert.css','utf8');const min=css.replace(/\\/\\*[\\s\\S]*?\\*\\//g,'').replace(/\\s+/g,' ').replace(/\\s*([{}:;,])\\s*/g,'$1').replace(/;}/g,'}').trim();fs.writeFileSync('vanitycert.min.css',min);\"",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ssl",
+    "certificate",
+    "tls",
+    "https",
+    "vanitycert",
+    "widget",
+    "embed",
+    "dns",
+    "domain",
+    "encryption",
+    "security"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vanitycert/widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vanitycert/widget/issues"
+  },
+  "homepage": "https://docs.vanitycert.com",
+  "author": "VanityCert <support@vanitycert.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "terser": "^5.31.0",
+    "cssnano-cli": "^1.0.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

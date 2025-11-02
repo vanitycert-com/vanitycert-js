@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VanityCert Widget Demo</title>
+
+  <!-- VanityCert Widget CSS -->
+  <link rel="stylesheet" href="../vanitycert.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .demo-header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .demo-header h1 {
+      font-size: 48px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .demo-header p {
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    .demo-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .widget-section {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .widget-section h2 {
+      font-size: 24px;
+      margin-bottom: 24px;
+      color: #10243f;
+    }
+
+    .controls-section {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .controls-section h2 {
+      font-size: 24px;
+      margin-bottom: 24px;
+      color: #10243f;
+    }
+
+    .control-group {
+      margin-bottom: 24px;
+    }
+
+    .control-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .control-group input,
+    .control-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .control-group input:focus,
+    .control-group select:focus {
+      outline: none;
+      border-color: #1867a0;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .demo-btn {
+      flex: 1;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .demo-btn-primary {
+      background: #10243f;
+      color: white;
+    }
+
+    .demo-btn-primary:hover {
+      background: #1867a0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .demo-btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .demo-btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .log-section {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 2px solid #e0e0e0;
+    }
+
+    .log-section h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #10243f;
+    }
+
+    .log-output {
+      background: #f8f8f8;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .log-entry {
+      margin-bottom: 8px;
+      padding: 4px 0;
+    }
+
+    .log-entry.success {
+      color: #28a745;
+    }
+
+    .log-entry.error {
+      color: #dc3545;
+    }
+
+    .log-entry.info {
+      color: #17a2b8;
+    }
+
+    .log-timestamp {
+      opacity: 0.6;
+      margin-right: 8px;
+    }
+
+    .info-box {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .info-box-title {
+      font-weight: 600;
+      color: #856404;
+      margin-bottom: 8px;
+    }
+
+    .info-box-text {
+      color: #856404;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1024px) {
+      .demo-content {
+        grid-template-columns: 1fr;
+      }
+
+      .widget-section {
+        order: 2;
+      }
+
+      .controls-section {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .demo-header h1 {
+        font-size: 32px;
+      }
+
+      .demo-header p {
+        font-size: 16px;
+      }
+
+      .widget-section,
+      .controls-section {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="demo-header">
+      <h1>VanityCert Widget Demo</h1>
+      <p>Interactive demonstration of the SSL certificate provisioning widget</p>
+    </div>
+
+    <div class="demo-content">
+      <!-- Widget Section -->
+      <div class="widget-section">
+        <h2>Widget Preview</h2>
+
+        <div class="info-box">
+          <div class="info-box-title">⚠️ Demo Mode</div>
+          <div class="info-box-text">
+            This is a demonstration page. In production, you need a backend proxy endpoint to handle API requests securely.
+            See the <a href="../README.md" target="_blank">README</a> for implementation details.
+          </div>
+        </div>
+
+        <!-- Widget Container -->
+        <div id="ssl-widget"></div>
+      </div>
+
+      <!-- Controls Section -->
+      <div class="controls-section">
+        <h2>Configuration</h2>
+
+        <div class="control-group">
+          <label for="userId">User ID</label>
+          <input type="text" id="userId" value="demo-user-123" placeholder="Unique user identifier">
+        </div>
+
+        <div class="control-group">
+          <label for="serverId">Server ID</label>
+          <input type="number" id="serverId" value="123" placeholder="VanityCert server ID">
+        </div>
+
+        <div class="control-group">
+          <label for="apiEndpoint">API Endpoint</label>
+          <input type="text" id="apiEndpoint" value="/api/vanitycert-proxy" placeholder="Backend proxy URL">
+        </div>
+
+        <div class="control-group">
+          <label for="primaryColor">Primary Color</label>
+          <input type="color" id="primaryColor" value="#10243f">
+        </div>
+
+        <div class="control-group">
+          <label for="secondaryColor">Secondary Color</label>
+          <input type="color" id="secondaryColor" value="#1867a0">
+        </div>
+
+        <div class="control-group">
+          <label for="successColor">Success Color</label>
+          <input type="color" id="successColor" value="#28a745">
+        </div>
+
+        <div class="button-group">
+          <button class="demo-btn demo-btn-primary" onclick="initializeWidget()">Initialize Widget</button>
+          <button class="demo-btn demo-btn-secondary" onclick="destroyWidget()">Destroy Widget</button>
+        </div>
+
+        <div class="button-group">
+          <button class="demo-btn demo-btn-secondary" onclick="clearState()">Clear State</button>
+          <button class="demo-btn demo-btn-secondary" onclick="clearLogs()">Clear Logs</button>
+        </div>
+
+        <!-- Event Log -->
+        <div class="log-section">
+          <h3>Event Log</h3>
+          <div id="log-output" class="log-output">
+            <div class="log-entry info">
+              <span class="log-timestamp">[Ready]</span>
+              Widget ready to initialize. Click "Initialize Widget" to start.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VanityCert Widget JS -->
+  <script src="../vanitycert.js"></script>
+
+  <script>
+    let widgetInstance = null;
+
+    // Log utility
+    function log(message, type = 'info') {
+      const logOutput = document.getElementById('log-output');
+      const timestamp = new Date().toLocaleTimeString();
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.innerHTML = `<span class="log-timestamp">[${timestamp}]</span>${message}`;
+      logOutput.appendChild(entry);
+      logOutput.scrollTop = logOutput.scrollHeight;
+    }
+
+    // Initialize widget
+    function initializeWidget() {
+      try {
+        // Get configuration values
+        const userId = document.getElementById('userId').value;
+        const serverId = parseInt(document.getElementById('serverId').value);
+        const apiEndpoint = document.getElementById('apiEndpoint').value;
+        const primaryColor = document.getElementById('primaryColor').value;
+        const secondaryColor = document.getElementById('secondaryColor').value;
+        const successColor = document.getElementById('successColor').value;
+
+        // Destroy existing instance
+        if (widgetInstance) {
+          VanityCert.destroy('#ssl-widget');
+          log('Destroyed existing widget instance', 'info');
+        }
+
+        // Initialize widget
+        widgetInstance = VanityCert.init({
+          target: '#ssl-widget',
+          apiEndpoint: apiEndpoint,
+          serverId: serverId,
+          userId: userId,
+
+          theme: {
+            primaryColor: primaryColor,
+            secondaryColor: secondaryColor,
+            successColor: successColor
+          },
+
+          callbacks: {
+            onDomainCreated: function(domain) {
+              log(`Domain created: ${domain.url} (ID: ${domain.id})`, 'success');
+              console.log('Domain created:', domain);
+            },
+
+            onDnsValidated: function(domain) {
+              log(`DNS validated for: ${domain.url}`, 'success');
+              console.log('DNS validated:', domain);
+            },
+
+            onCertificateIssued: function(domain) {
+              log(`Certificate issued for: ${domain.url}`, 'success');
+              console.log('Certificate issued:', domain);
+            },
+
+            onValidationFailed: function(domain, reason) {
+              log(`Validation failed for ${domain.url}: ${reason}`, 'error');
+              console.error('Validation failed:', domain, reason);
+            },
+
+            onError: function(error) {
+              log(`Error: ${error.message || error}`, 'error');
+              console.error('Widget error:', error);
+            },
+
+            onComplete: function(domain) {
+              log(`Setup complete for: ${domain.url}`, 'success');
+              console.log('Setup complete:', domain);
+            }
+          }
+        });
+
+        log('Widget initialized successfully', 'success');
+        console.log('Widget instance:', widgetInstance);
+
+      } catch (error) {
+        log(`Failed to initialize widget: ${error.message}`, 'error');
+        console.error('Initialization error:', error);
+      }
+    }
+
+    // Destroy widget
+    function destroyWidget() {
+      try {
+        VanityCert.destroy('#ssl-widget');
+        widgetInstance = null;
+        log('Widget destroyed', 'info');
+      } catch (error) {
+        log(`Failed to destroy widget: ${error.message}`, 'error');
+      }
+    }
+
+    // Clear state
+    function clearState() {
+      try {
+        const userId = document.getElementById('userId').value;
+        const key = `vanitycert_${userId}`;
+        localStorage.removeItem(key);
+        log(`Cleared state for user: ${userId}`, 'info');
+
+        // Reinitialize if widget exists
+        if (widgetInstance) {
+          initializeWidget();
+        }
+      } catch (error) {
+        log(`Failed to clear state: ${error.message}`, 'error');
+      }
+    }
+
+    // Clear logs
+    function clearLogs() {
+      const logOutput = document.getElementById('log-output');
+      logOutput.innerHTML = '<div class="log-entry info"><span class="log-timestamp">[Cleared]</span>Event log cleared.</div>';
+    }
+
+    // Auto-initialize on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      log('Page loaded. Ready to initialize widget.', 'info');
+
+      // Auto-initialize widget (optional)
+      // initializeWidget();
+    });
+
+    // Log when user changes configuration
+    document.querySelectorAll('input, select').forEach(input => {
+      input.addEventListener('change', function() {
+        log(`Configuration updated: ${this.id} = ${this.value}`, 'info');
+      });
+    });
+  </script>
+</body>
+</html>
