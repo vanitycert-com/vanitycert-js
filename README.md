@@ -54,7 +54,7 @@ The widget requires a backend proxy to securely call the VanityCert API. See [Ba
 <script src="https://cdn.vanitycert.com/widget/v1/vanitycert.js"></script>
 ```
 
-### NPM (Coming Soon)
+### NPM
 
 ```bash
 npm install @vanitycert/widget
