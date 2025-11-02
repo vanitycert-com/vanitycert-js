@@ -47,11 +47,11 @@ The widget requires a backend proxy to securely call the VanityCert API. See [Ba
 
 ## Installation
 
-### CDN (Coming Soon)
+### CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.vanitycert.com/widget/v1/vanitycert.css">
-<script src="https://cdn.vanitycert.com/widget/v1/vanitycert.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vanitycert/widget@1/vanitycert.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@vanitycert/widget@1/vanitycert.min.js"></script>
 ```
 
 ### NPM
